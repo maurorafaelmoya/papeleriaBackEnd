@@ -27,10 +27,10 @@ class UserController {
     async newUserController(req = request, res = response ) {
         
         try {
-            const { code, message, data, token } = await userService.newUserService(req.body);
+            const { code, message, data, token, pass } = await userService.newUserService(req.body);
 
             if(code ===201){
-                const templateNewUser = newUser(token,req.body.name, req.body.email, req.body.password )
+                const templateNewUser = newUser(token,req.body.name, req.body.email, pass )
                 console.log(templateNewUser)
                 await sendEmail(req.body.email, 'CLIENTE NUEVO', templateNewUser)
             }
@@ -43,7 +43,7 @@ class UserController {
     }
 
     /**
-     * Crear nuevo usuario
+     * Login de usuario
      * 
      * @param {*} req 
      * @param {*} res 

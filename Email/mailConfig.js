@@ -1,5 +1,8 @@
 const nodemailer = require("nodemailer");
 
+/**
+ * configuracion del correo
+ */
 const transporter = nodemailer.createTransport({
     service:"gmail",
     auth: {
@@ -8,7 +11,12 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-
+/**
+ * 
+ * @param {*} to  para 
+ * @param {*} subject  asunto
+ * @param {*} html  plantilla html
+ */
 async function sendEmail(to, subject, html) {
     // send mail with defined transport object
     const info = await transporter.sendMail({

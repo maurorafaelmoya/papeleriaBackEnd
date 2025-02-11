@@ -1,9 +1,9 @@
 /**
  * 
- * @param {*} token 
- * @param {*} name 
- * @param {*} email 
- * @param {*} pass 
+ * @param {*} token token a validar
+ * @param {*} name  nombre del usuario
+ * @param {*} email correo del usuario
+ * @param {*} pass  contraseña del usuario
  * @returns 
  */
 const newUser = (token, name,email, pass) =>{

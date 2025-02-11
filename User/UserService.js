@@ -20,6 +20,7 @@ class UserService {
      */
     async newUserService( payload ) {
         const { password, email } = payload;
+        const pass = password;
         const salt = bcryptjs.genSaltSync();
         payload.password = bcryptjs.hashSync(password, salt);
 
@@ -31,7 +32,7 @@ class UserService {
             const token= await generarJWT(data._id, email);
             
             if(data._id){
-                return { code, message, data, token };
+                return { code, message, data, token, pass };
             }else{
                 return { code:400, message:'Error al crear usuario' };
             }
@@ -44,7 +45,7 @@ class UserService {
     }
 
      /**
-     * Encargado de guardar un nuevo usuario
+     * Encargado hacer el login de usuario
      * 
      * @param {Json} payload Información del usuario
      * 

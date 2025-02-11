@@ -39,9 +39,9 @@ class UserRepository {
             const response = await User.findOne(payload)
             
             if(response){
-                return { code: 201, data: response, message: 'Usuario Encontrado' }
+                return { code: 201, data: response, message: 'Inicio de sesion exitoso' }
             }else{
-                return { code: 404, message: 'Usuario No encontrado' }
+                return { code: 404, message: 'Usuario No encontrado', data:{} }
             }
             
         } catch (error) {

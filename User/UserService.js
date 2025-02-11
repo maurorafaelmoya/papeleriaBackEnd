@@ -55,7 +55,25 @@ class UserService {
         const {email, password} = payload;
 
         const { code, message,data } = await userRepository.getUser({email});
-        return { code, message, data };
+
+        if(Object.keys(data).length===0){
+            return { code: 400, message: 'Cuenta inexistente', data:{} };
+        }
+
+        if(data.status === false){
+            return { code: 401, message: 'Cuenta desactivada, favor de verificar tu correo', data:{} };
+        }
+
+        const validPassword = bcryptjs.compareSync(password, data.password);  //Esta linea verifica que la contraseña ingresada haga match con la establecida
+
+        if (!validPassword){
+            return {code: 401, message: 'Usuario contraseña incorrecta', data: {} };
+        }
+
+        const token= await generarJWT(data._id, email);
+
+
+        return { code, message, data:{data, token} };
 
     }
 

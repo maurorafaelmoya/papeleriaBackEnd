@@ -1,4 +1,20 @@
-# specify the node base image with your desired version node:<version>
-FROM node:16
-# replace this with your application's default port
+# Usa una imagen oficial de Node.js como base
+FROM node:22
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia los archivos package.json y package-lock.json
+COPY package*.json ./
+
+# Instala las dependencias (puedes usar --omit=dev en producción)
+RUN npm install 
+
+# Copia el resto del código de la aplicación
+COPY . .
+
+# Expone el puerto en el que corre la app (ajústalo según tu app)
 EXPOSE 4000
+
+# Comando por defecto para correr la app
+CMD ["npm", "start"]
